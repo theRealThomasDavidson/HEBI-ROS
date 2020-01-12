@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
   ros::Rate loop_rate(200);
 
-  std::string group_name = "my_group";
+  std::string group_name = "arm";
 
   //Create a client which uses the service to see the entry list of modules
   ros::ServiceClient entry_list_client = n.serviceClient<EntryListSrv>(
