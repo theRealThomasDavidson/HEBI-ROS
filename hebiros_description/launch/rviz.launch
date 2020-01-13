@@ -1,5 +1,5 @@
 <launch>
-    <param name="robot_description" command="$http://www.ros.org/wiki/xacro --inorder '$(find hebiros_description)/urdf/myArm.xacro'"/>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find hebiros_description)/urdf/myArm.xacro'"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
     <node name="rviz" pkg="rviz" type="rviz"/>
 
