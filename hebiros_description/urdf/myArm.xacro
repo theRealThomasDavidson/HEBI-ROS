@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <!-- HEBI 6-DOF Robot arm kit -->
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="A-2085-06">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="CNU HEBI Arm">
 
   <!-- *************************** XACRO MACROS *************************** -->
 
