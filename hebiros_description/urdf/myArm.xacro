@@ -1,17 +1,11 @@
 <?xml version="1.0"?>
 
-<robot name="arm_demo">
+<!-- HEBI 6-DOF Robot arm kit -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="A-2085-06">
 
   <!-- *************************** XACRO MACROS *************************** -->
 
-  <xacro:property name="PI" value="3.1415926535897931" />
-
-  <!-- load macros for modules -->
-  <xacro:include filename="./x_series_common.xacro"/>
-  <xacro:include filename="./x5.xacro"/>
-  <xacro:include filename="./x_shoulder_bracket.xacro"/>
-  <xacro:include filename="./x_wrist_bracket.xacro"/>
-  <xacro:include filename="./x_tube_link.xacro"/>
+  <xacro:include filename="./x_library.xacro"/>
 
   <!-- ************************* ROBOT DEFINITION ************************* -->
 
@@ -25,14 +19,14 @@
   <!-- just for visualization: base post -->
   <link name="base">
     <visual>
-      <origin xyz=".125 0 -.0254" rpy="0 0 0" />
+      <origin xyz="-.125 0 -.0254" rpy="0 0 0" />
       <geometry>
         <box size="0.25 0.5 0.0508" />
       </geometry>
       <xacro:silver_material/>
     </visual>
     <collision>
-      <origin xyz=".125 0 -.0254" rpy="0 0 0" />
+      <origin xyz="-.125 0 -.0254" rpy="0 0 0" />
       <geometry>
         <box size="0.25 0.5 0.0508" />
       </geometry>
@@ -50,8 +44,13 @@
   </joint>
 
   <!-- joints -->
-  <xacro:x5 joint="HEBI/base" child="base_end" model="X5-4"/>
-  <xacro:x_tube_link name="base_end" child="end_effector" length="0.33" twist="0"/>
+  <xacro:x5 joint="HEBI/base" child="shoulder_bracket" model="X5_4"/>
+  <xacro:x5_heavy_right_outside_bracket name="shoulder_bracket" child="HEBI/shoulder"/>
+  <xacro:x5 joint="HEBI/shoulder" child="shoulder_elbow" model="X5_9"/>
+  <xacro:x_tube_link name="shoulder_elbow" child="HEBI/elbow" extension="0.325" twist="${PI/2}"/>
+  <xacro:x5 joint="HEBI/elbow" child="elbow_wrist1" model="X5_4"/>
+  <xacro:x_tube_link name="elbow_wrist1" child="HEBI/wrist1" extension="0.325" twist="${0}"/>
+  <xacro:x5 joint="HEBI/wrist1" child="end_effector" model="X5_9"/>
 
   <!-- end link -->
   <link name="end_effector/INPUT_INTERFACE">
