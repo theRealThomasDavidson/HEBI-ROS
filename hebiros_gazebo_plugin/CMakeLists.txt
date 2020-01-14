@@ -123,7 +123,6 @@ catkin_package(
   rospy
   std_msgs
   sensor_msgs
-  smach_viewer
 #  DEPENDS system_lib
 )
 
