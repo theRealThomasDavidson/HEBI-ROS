@@ -17,18 +17,19 @@
   </joint>
 
   <!-- just for visualization: base post -->
+  <xacro:property name="base_height" value="${.135}"/>
   <link name="base">
     <visual>
-      <origin xyz="-.125 0 -.0254" rpy="0 0 0" />
+      <origin xyz="0 0 ${base_height/2}" rpy="0 0 0" />
       <geometry>
-        <box size="0.25 0.5 0.0508" />
+        <box size="0.25 0.5 ${base_height}" />
       </geometry>
       <xacro:silver_material/>
     </visual>
     <collision>
-      <origin xyz="-.125 0 -.0254" rpy="0 0 0" />
+      <origin xyz="0 0 ${base_height/2}" rpy="0 0 0" />
       <geometry>
-        <box size="0.25 0.5 0.0508" />
+        <box size="0.25 0.5 ${base_height}" />
       </geometry>
     </collision>
     <inertial>
@@ -40,7 +41,7 @@
   <joint name="base_base" type="fixed">
     <parent link="base"/>
     <child link="HEBI/base/INPUT_INTERFACE"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 ${base_height}" rpy="0 0 0"/>
   </joint>
 
   <!-- joints -->
@@ -51,7 +52,7 @@
   <xacro:x5 joint="HEBI/elbow" child="elbow_wrist1" model="X5_4"/>
   <xacro:x_tube_link name="elbow_wrist1" child="HEBI/wrist" extension="0.325" twist="${0}"/>
   <xacro:x5 joint="HEBI/wrist" child="wrist_paddle" model="X5_9"/>
-  <xacro:paddle_end name="wrist_paddle" child="end_effector" extension="0.1"/>
+  <xacro:paddle_end name="wrist_paddle" child="end_effector" extension="0.1" paddle_mass=".04" paddle_diameter=".1016"/>
   <!-- end link -->
   <link name="end_effector/INPUT_INTERFACE">
   </link>
