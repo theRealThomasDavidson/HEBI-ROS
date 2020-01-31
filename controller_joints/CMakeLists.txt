@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(hebiros)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -O2")
+project(controller_joints)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -9,20 +7,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -O2")
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-  sensor_msgs
-  tf
-  urdf
-  message_generation
-  genmsg
-  actionlib_msgs
-  actionlib
-)
+find_package(catkin REQUIRED)
 
 ## System dependencies are found with CMake's conventions
-find_package(Boost REQUIRED COMPONENTS system)
+# find_package(Boost REQUIRED COMPONENTS system)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -40,10 +28,10 @@ find_package(Boost REQUIRED COMPONENTS system)
 ##   your messages/services/actions (e.g. std_msgs, actionlib_msgs, ...).
 ## * In the file package.xml:
 ##   * add a build_depend tag for "message_generation"
-##   * add a build_depend and a run_depend tag for each package in MSG_DEP_SET
+##   * add a build_depend and a exec_depend tag for each package in MSG_DEP_SET
 ##   * If MSG_DEP_SET isn't empty the following dependency has been pulled in
 ##     but can be declared for certainty nonetheless:
-##     * add a run_depend tag for "message_runtime"
+##     * add a exec_depend tag for "message_runtime"
 ## * In this file (CMakeLists.txt):
 ##   * add "message_generation" and every package in MSG_DEP_SET to
 ##     find_package(catkin REQUIRED COMPONENTS ...)
@@ -55,44 +43,31 @@ find_package(Boost REQUIRED COMPONENTS system)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-add_message_files(
-  FILES
-  EntryMsg.msg
-  EntryListMsg.msg
-  FeedbackMsg.msg
-  WaypointMsg.msg
-  CommandMsg.msg
-  SettingsMsg.msg
-  PidGainsMsg.msg
-)
+# add_message_files(
+#   FILES
+#   Message1.msg
+#   Message2.msg
+# )
 
 ## Generate services in the 'srv' folder
-add_service_files(
-  FILES
-  EntryListSrv.srv
-  AddGroupFromNamesSrv.srv
-  AddGroupFromURDFSrv.srv
-  AddModelFromURDFSrv.srv
-  ModelFkSrv.srv
-  SizeSrv.srv
-  SetFeedbackFrequencySrv.srv
-  SetCommandLifetimeSrv.srv
-  SendCommandWithAcknowledgementSrv.srv
-)
+# add_service_files(
+#   FILES
+#   Service1.srv
+#   Service2.srv
+# )
 
 ## Generate actions in the 'action' folder
-add_action_files(
-  FILES
-  Trajectory.action
-)
+# add_action_files(
+#   FILES
+#   Action1.action
+#   Action2.action
+# )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-  sensor_msgs
-  actionlib_msgs
-)
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs  # Or other packages containing msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -101,7 +76,7 @@ generate_messages(
 ## To declare and build dynamic reconfigure parameters within this
 ## package, follow these steps:
 ## * In the file package.xml:
-##   * add a build_depend and a run_depend tag for "dynamic_reconfigure"
+##   * add a build_depend and a exec_depend tag for "dynamic_reconfigure"
 ## * In this file (CMakeLists.txt):
 ##   * add "dynamic_reconfigure" to
 ##     find_package(catkin REQUIRED COMPONENTS ...)
@@ -119,18 +94,14 @@ generate_messages(
 ###################################
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
-## INCLUDE_DIRS: uncomment this if you package contains header files
+## INCLUDE_DIRS: uncomment this if your package contains header files
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES hebiros
+#  LIBRARIES controller_joints
 #  CATKIN_DEPENDS other_catkin_pkg
-  CATKIN_DEPENDS roscpp
-  CATKIN_DEPENDS actionlib
-  CATKIN_DEPENDS message_runtime
-  CATKIN_DEPENDS tf
 #  DEPENDS system_lib
 )
 
@@ -141,16 +112,13 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  ${catkin_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIRS}
-  include/hebi
-  include/hebi/Eigen
-  include/hebiros
+# include
+# ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/hebiros.cpp
+#   src/${PROJECT_NAME}/controller_joints.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -161,44 +129,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/hebiros_node.cpp)
-
-add_executable(hebiros_node src/hebiros_node.cpp
-  include/hebi/command.cpp
-  include/hebi/feedback.cpp
-  include/hebi/group_command.cpp
-  include/hebi/group_feedback.cpp
-  include/hebi/group_info.cpp
-  include/hebi/group.cpp
-  include/hebi/info.cpp
-  include/hebi/robot_model.cpp
-  include/hebi/log_file.cpp
-  include/hebi/lookup.cpp
-  include/hebi/mac_address.cpp
-  include/hebi/trajectory.cpp
-
-  src/hebiros.cpp
-  src/hebiros_parameters.cpp
-  src/hebiros_group.cpp
-  src/hebiros_group_gazebo.cpp
-  src/hebiros_group_physical.cpp
-  src/hebiros_group_registry.cpp
-  src/hebiros_services.cpp
-  src/hebiros_services_gazebo.cpp
-  src/hebiros_services_physical.cpp
-  src/hebiros_subscribers.cpp
-  src/hebiros_subscribers_gazebo.cpp
-  src/hebiros_subscribers_physical.cpp
-  src/hebiros_publishers.cpp
-  src/hebiros_publishers_gazebo.cpp
-  src/hebiros_publishers_physical.cpp
-  src/hebiros_clients.cpp
-  src/hebiros_actions.cpp
-  src/hebiros_model.cpp
-
-)
-
-add_dependencies(hebiros_node hebiros_generate_messages_cpp)
+# add_executable(${PROJECT_NAME}_node src/controller_joints_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -215,8 +146,6 @@ add_dependencies(hebiros_node hebiros_generate_messages_cpp)
 #   ${catkin_LIBRARIES}
 # )
 
-target_link_libraries(hebiros_node ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/lib/linux_x86_64/libhebi.so)
-
 #############
 ## Install ##
 #############
@@ -231,11 +160,18 @@ target_link_libraries(hebiros_node ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/lib
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
 
-## Mark executables and/or libraries for installation
-# install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
+## Mark executables for installation
+## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
+# install(TARGETS ${PROJECT_NAME}_node
+#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
+
+## Mark libraries for installation
+## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
+# install(TARGETS ${PROJECT_NAME}
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+#   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
 # )
 
 ## Mark cpp header files for installation
@@ -257,9 +193,10 @@ target_link_libraries(hebiros_node ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/lib
 #############
 
 ## Add gtest based cpp test target and link libraries
-find_package(rostest REQUIRED)
-add_rostest_gtest(${PROJECT_NAME}-test launch/test_fk_1.test tests/test_fk_1.cpp)
-target_link_libraries(${PROJECT_NAME}-test ${catkin_LIBRARIES})
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_controller_joints.cpp)
+# if(TARGET ${PROJECT_NAME}-test)
+#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
+# endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
