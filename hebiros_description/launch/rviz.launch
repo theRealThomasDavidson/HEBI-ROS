@@ -1,0 +1,13 @@
+<launch>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find hebiros_description)/urdf/myArm.xacro'"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <node name="rviz" pkg="rviz" type="rviz"/>
+
+
+    <node name="controller_input" pkg="joy" type="joy_node"/>
+
+
+    <node name="joint_state_publisher" pkg="controller_joints" type="controller_jointPub.py" >
+        <param name="use_gui" value="True"/>
+    </node>
+</launch>
