@@ -1,7 +1,6 @@
 <launch>
   <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
   <param name="my_arm_description" command="$(find xacro)/xacro --inorder '$(find hebiros_description)/urdf/myArm.xacro'"/>
-  <!--<node name="spawn_MyArm" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -z 1 -model x_demo" respawn="false" output="screen"/>-->
-
+  <node name="spawn_MyArm" pkg="gazebo_ros" type="spawn_model" args="-param my_arm_description -urdf -z 1 -model MyArm" respawn="false" output="screen"/>
 
 </launch>
