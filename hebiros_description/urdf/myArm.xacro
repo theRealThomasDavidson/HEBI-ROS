@@ -11,7 +11,7 @@
 
   <link name="world" />
   <joint name="world_joint"  type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
+    <origin xyz="0 0 -1" rpy="0 0 0" />
     <parent link="world"/>
     <child link="base"/>
   </joint>
@@ -22,7 +22,7 @@
     <visual>
       <origin xyz="0 0 ${base_height/2}" rpy="0 0 0" />
       <geometry>
-        <box size="0.25 0.5 ${base_height}" />
+        <box size="0.05 0.05 ${base_height}" />
       </geometry>
       <xacro:silver_material/>
     </visual>
@@ -40,21 +40,39 @@
   </link>
   <joint name="base_base" type="fixed">
     <parent link="base"/>
-    <child link="HEBI/base/INPUT_INTERFACE"/>
+    <child link="end_effector/INPUT_INTERFACE"/>
     <origin xyz="0 0 ${base_height}" rpy="0 0 0"/>
   </joint>
 
   <!-- joints -->
-  <xacro:x5 joint="HEBI/base" child="shoulder_bracket" model="X5_4"/>
+  <!--<xacro:x5 joint="HEBI/base" child="shoulder_bracket" model="X5_4"/>
   <xacro:x5_heavy_right_outside_bracket name="shoulder_bracket" child="HEBI/shoulder"/>
   <xacro:x5 joint="HEBI/shoulder" child="shoulder_elbow" model="X5_9"/>
   <xacro:x_tube_link name="shoulder_elbow" child="HEBI/elbow" extension="0.325" twist="${PI/2}"/>
   <xacro:x5 joint="HEBI/elbow" child="elbow_wrist1" model="X5_4"/>
   <xacro:x_tube_link name="elbow_wrist1" child="HEBI/wrist" extension="0.325" twist="${0}"/>
   <xacro:x5 joint="HEBI/wrist" child="wrist_paddle" model="X5_9"/>
-  <xacro:paddle_end name="wrist_paddle" child="end_effector" extension="0.1" paddle_mass=".04" paddle_diameter=".1016"/>
+  <xacro:paddle_end name="wrist_paddle" child="end_effector/INPUT_INTERFACE" extension="0.1" paddle_mass=".04" paddle_diameter=".1016"/>-->
   <!-- end link -->
   <link name="end_effector/INPUT_INTERFACE">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.01 0.01 0.01" />
+      </geometry>
+      <xacro:silver_material/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz=".125 0 -.0254" rpy="0 0 0" />
+      <mass value="0.0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
   </link>
 
   <gazebo reference="base">

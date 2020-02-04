@@ -8,10 +8,10 @@ void HebirosGazeboPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
   char **argv = NULL;
   ros::init(argc, argv, "hebiros_gazebo_plugin_node");
 
-  this->add_group_srv =
+  /*this->add_group_srv =                                                         //start segfault here
     this->n->advertiseService<AddGroupFromNamesSrv::Request, AddGroupFromNamesSrv::Response>(
     "hebiros_gazebo_plugin/add_group", boost::bind(
-    &HebirosGazeboPlugin::SrvAddGroup, this, _1, _2));
+    &HebirosGazeboPlugin::SrvAddGroup, this, _1, _2));*/                          //end segfault here
 
   this->robot_namespace = "";
   if (_sdf->HasElement("robotNamespace")) {
