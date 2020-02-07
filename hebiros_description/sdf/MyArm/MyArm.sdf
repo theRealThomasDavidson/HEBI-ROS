@@ -3,15 +3,15 @@
     <link name='base'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
-        <pose frame=''>0.125 0 -0.0254 0 -0 0</pose>
-        <mass>1</mass>
+        <pose frame=''>0.09007 -0.000778 0.018991 0 -0 0</pose>
+        <mass>1.335</mass>
         <inertia>
-          <ixx>2</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>2</iyy>
-          <iyz>0</iyz>
-          <izz>2</izz>
+          <ixx>1.00801</ixx>
+          <ixy>-7.4184e-05</ixy>
+          <ixz>0.00619098</ixz>
+          <iyy>1.01297</iyy>
+          <iyz>0.000139901</iyz>
+          <izz>1.00521</izz>
         </inertia>
       </inertial>
       <collision name='base_collision'>
@@ -30,13 +30,22 @@
           </friction>
         </surface>
       </collision>
-      <collision name='base_fixed_joint_lump__end_effector/INPUT_INTERFACE_collision_1'>
+      <collision name='base_fixed_joint_lump__HEBI/base/INPUT_INTERFACE_collision_1'>
         <pose frame=''>0 0 0.135 0 -0 0</pose>
         <geometry>
-          <box>
-            <size>0.01 0.01 0.01</size>
-          </box>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/x5.stl</uri>
+          </mesh>
         </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
       </collision>
       <visual name='base_visual'>
         <pose frame=''>0 0 0.0675 0 -0 0</pose>
@@ -52,8 +61,645 @@
           </script>
         </material>
       </visual>
-      <visual name='base_fixed_joint_lump__end_effector/INPUT_INTERFACE_visual_1'>
+      <visual name='base_fixed_joint_lump__HEBI/base/INPUT_INTERFACE_visual_1'>
         <pose frame=''>0 0 0.135 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/x5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay/>
+      <gravity>1</gravity>
+      <velocity_decay/>
+      <self_collide>1</self_collide>
+      <gravity>1</gravity>
+      <sensor name='HEBI/base/imu_sensor' type='imu'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <visualize>1</visualize>
+        <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+          <topicName>/hebiros_gazebo_plugin/imu/HEBI/base</topicName>
+          <bodyName>HEBI/base/imu_link</bodyName>
+          <updateRateHZ>10.0</updateRateHZ>
+          <gaussianNoise>0.0</gaussianNoise>
+          <xyzOffset>0.025 0 0.003</xyzOffset>
+          <rpyOffset>0 0 0</rpyOffset>
+          <frameName>HEBI/base/imu_link</frameName>
+        </plugin>
+        <pose frame=''>0 0 0.135 0 -0 0</pose>
+      </sensor>
+    </link>
+    <joint name='world_joint' type='fixed'>
+      <child>base</child>
+      <parent>world</parent>
+    </joint>
+    <link name='shoulder_bracket/INPUT_INTERFACE'>
+      <pose frame=''>0 0 0.166 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>-0.00889 -0.04082 0.042777 0 -0 0</pose>
+        <mass>0.575</mass>
+        <inertia>
+          <ixx>0.000707</ixx>
+          <ixy>-7.91784e-05</ixy>
+          <ixz>8.07392e-05</ixz>
+          <iyy>0.000766883</iyy>
+          <iyz>0.000113487</iyz>
+          <izz>0.000759002</izz>
+        </inertia>
+      </inertial>
+      <collision name='shoulder_bracket/INPUT_INTERFACE_collision'>
+        <pose frame=''>0 0 0.005 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/PM-2149-01.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='shoulder_bracket/INPUT_INTERFACE_collision_1'>
+        <pose frame=''>0 -0.03 0.04 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/PM-2150-01R.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='shoulder_bracket/INPUT_INTERFACE_fixed_joint_lump__HEBI/shoulder/INPUT_INTERFACE_collision_2'>
+        <pose frame=''>0 -0.0375 0.055 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/x5.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='shoulder_bracket/INPUT_INTERFACE_visual'>
+        <pose frame=''>0 0 0.005 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/PM-2149-01.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='shoulder_bracket/INPUT_INTERFACE_visual_1'>
+        <pose frame=''>0 -0.03 0.04 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/PM-2150-01R.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='shoulder_bracket/INPUT_INTERFACE_fixed_joint_lump__HEBI/shoulder/INPUT_INTERFACE_visual_2'>
+        <pose frame=''>0 -0.0375 0.055 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/x5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay/>
+      <gravity>1</gravity>
+      <velocity_decay/>
+      <self_collide>1</self_collide>
+      <gravity>1</gravity>
+      <sensor name='HEBI/shoulder/imu_sensor' type='imu'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <visualize>1</visualize>
+        <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+          <topicName>/hebiros_gazebo_plugin/imu/HEBI/shoulder</topicName>
+          <bodyName>HEBI/shoulder/imu_link</bodyName>
+          <updateRateHZ>10.0</updateRateHZ>
+          <gaussianNoise>0.0</gaussianNoise>
+          <xyzOffset>0.025 0 0.003</xyzOffset>
+          <rpyOffset>0 0 0</rpyOffset>
+          <frameName>HEBI/shoulder/imu_link</frameName>
+        </plugin>
+        <pose frame=''>0 -0.0375 0.055 1.5708 -0 0</pose>
+      </sensor>
+    </link>
+    <joint name='HEBI/base/X5_4' type='revolute'>
+      <child>shoulder_bracket/INPUT_INTERFACE</child>
+      <parent>base</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='shoulder_elbow/INPUT_INTERFACE'>
+      <pose frame=''>0 -0.0685 0.221 1.5708 -0 0</pose>
+      <inertial>
+        <pose frame=''>0.229909 -0.016591 0.018591 0 -0 0</pose>
+        <mass>0.737</mass>
+        <inertia>
+          <ixx>0.000395194</ixx>
+          <ixy>0.000977294</ixy>
+          <ixz>0.000118105</ixz>
+          <iyy>0.00790889</iyy>
+          <iyz>-2.29656e-05</iyz>
+          <izz>0.00805558</izz>
+        </inertia>
+      </inertial>
+      <collision name='shoulder_elbow/INPUT_INTERFACE_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://hebiros_description/meshes/A-2038-02.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='shoulder_elbow/INPUT_INTERFACE_collision_1'>
+        <pose frame=''>0.1625 0 0.02 3.14159 1.57079 3.14159</pose>
+        <geometry>
+          <cylinder>
+            <length>0.2996</length>
+            <radius>0.016</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='shoulder_elbow/INPUT_INTERFACE_collision_2'>
+        <pose frame=''>0.325 -0.02 0.02 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://hebiros_description/meshes/A-2039-02.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='shoulder_elbow/INPUT_INTERFACE_fixed_joint_lump__HEBI/elbow/INPUT_INTERFACE_collision_3'>
+        <pose frame=''>0.325 -0.02 0.02 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/x5.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='shoulder_elbow/INPUT_INTERFACE_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://hebiros_description/meshes/A-2038-02.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='shoulder_elbow/INPUT_INTERFACE_visual_1'>
+        <pose frame=''>0.1625 0 0.02 3.14159 1.57079 3.14159</pose>
+        <geometry>
+          <cylinder>
+            <length>0.2996</length>
+            <radius>0.016</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='shoulder_elbow/INPUT_INTERFACE_visual_2'>
+        <pose frame=''>0.325 -0.02 0.02 -1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://hebiros_description/meshes/A-2039-02.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='shoulder_elbow/INPUT_INTERFACE_fixed_joint_lump__HEBI/elbow/INPUT_INTERFACE_visual_3'>
+        <pose frame=''>0.325 -0.02 0.02 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/x5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay/>
+      <gravity>1</gravity>
+      <velocity_decay/>
+      <self_collide>1</self_collide>
+      <gravity>1</gravity>
+      <sensor name='HEBI/elbow/imu_sensor' type='imu'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <visualize>1</visualize>
+        <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+          <topicName>/hebiros_gazebo_plugin/imu/HEBI/elbow</topicName>
+          <bodyName>HEBI/elbow/imu_link</bodyName>
+          <updateRateHZ>10.0</updateRateHZ>
+          <gaussianNoise>0.0</gaussianNoise>
+          <xyzOffset>0.025 0 0.003</xyzOffset>
+          <rpyOffset>0 0 0</rpyOffset>
+          <frameName>HEBI/elbow/imu_link</frameName>
+        </plugin>
+        <pose frame=''>0.325 -0.02 0.02 1.5708 -0 0</pose>
+      </sensor>
+    </link>
+    <joint name='HEBI/shoulder/X5_9' type='revolute'>
+      <child>shoulder_elbow/INPUT_INTERFACE</child>
+      <parent>shoulder_bracket/INPUT_INTERFACE</parent>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='elbow_wrist1/INPUT_INTERFACE'>
+      <pose frame=''>0.325 -0.0885 0.17 3.14159 -0 0</pose>
+      <inertial>
+        <pose frame=''>0.232563 -0.001465 0.037244 0 -0 0</pose>
+        <mass>0.762</mass>
+        <inertia>
+          <ixx>0.000404848</ixx>
+          <ixy>0.000121413</ixy>
+          <ixz>-0.00101623</ixz>
+          <iyy>0.00822338</iyy>
+          <iyz>2.37796e-05</iyz>
+          <izz>0.00806718</izz>
+        </inertia>
+      </inertial>
+      <collision name='elbow_wrist1/INPUT_INTERFACE_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://hebiros_description/meshes/A-2038-02.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='elbow_wrist1/INPUT_INTERFACE_collision_1'>
+        <pose frame=''>0.1625 0 0.02 3.14159 1.57079 3.14159</pose>
+        <geometry>
+          <cylinder>
+            <length>0.2996</length>
+            <radius>0.016</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='elbow_wrist1/INPUT_INTERFACE_collision_2'>
+        <pose frame=''>0.325 0 0.04 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://hebiros_description/meshes/A-2039-02.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='elbow_wrist1/INPUT_INTERFACE_fixed_joint_lump__HEBI/wrist/INPUT_INTERFACE_collision_3'>
+        <pose frame=''>0.325 0 0.04 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/x5.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='elbow_wrist1/INPUT_INTERFACE_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://hebiros_description/meshes/A-2038-02.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='elbow_wrist1/INPUT_INTERFACE_visual_1'>
+        <pose frame=''>0.1625 0 0.02 3.14159 1.57079 3.14159</pose>
+        <geometry>
+          <cylinder>
+            <length>0.2996</length>
+            <radius>0.016</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='elbow_wrist1/INPUT_INTERFACE_visual_2'>
+        <pose frame=''>0.325 0 0.04 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://hebiros_description/meshes/A-2039-02.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='elbow_wrist1/INPUT_INTERFACE_fixed_joint_lump__HEBI/wrist/INPUT_INTERFACE_visual_3'>
+        <pose frame=''>0.325 0 0.04 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://hebiros_description/meshes/x5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay/>
+      <gravity>1</gravity>
+      <velocity_decay/>
+      <self_collide>1</self_collide>
+      <gravity>1</gravity>
+      <sensor name='HEBI/wrist/imu_sensor' type='imu'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <visualize>1</visualize>
+        <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+          <topicName>/hebiros_gazebo_plugin/imu/HEBI/wrist</topicName>
+          <bodyName>HEBI/wrist/imu_link</bodyName>
+          <updateRateHZ>10.0</updateRateHZ>
+          <gaussianNoise>0.0</gaussianNoise>
+          <xyzOffset>0.025 0 0.003</xyzOffset>
+          <rpyOffset>0 0 0</rpyOffset>
+          <frameName>HEBI/wrist/imu_link</frameName>
+        </plugin>
+        <pose frame=''>0.325 0 0.04 0 -0 0</pose>
+      </sensor>
+    </link>
+    <joint name='HEBI/elbow/X5_4' type='revolute'>
+      <child>elbow_wrist1/INPUT_INTERFACE</child>
+      <parent>shoulder_elbow/INPUT_INTERFACE</parent>
+      <axis>
+        <xyz>0 -0 -1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='wrist_paddle/INPUT_INTERFACE'>
+      <pose frame=''>0.65 -0.0885 0.099 3.14159 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0.0375 0 -0 0</pose>
+        <mass>0.312</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.00026</iyy>
+          <iyz>0</iyz>
+          <izz>1.00026</izz>
+        </inertia>
+      </inertial>
+      <collision name='wrist_paddle/INPUT_INTERFACE_collision'>
+        <pose frame=''>0 0 0.0375 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.075</length>
+            <radius>0.016</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='wrist_paddle/INPUT_INTERFACE_collision_1'>
+        <pose frame=''>0 0 0.0875 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.025</length>
+            <radius>0.0508</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='wrist_paddle/INPUT_INTERFACE_fixed_joint_lump__end_effector/INPUT_INTERFACE_collision_2'>
+        <pose frame=''>0 0 0.1 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.01 0.01 0.01</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='wrist_paddle/INPUT_INTERFACE_visual'>
+        <pose frame=''>0 0 0.0375 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.075</length>
+            <radius>0.016</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='wrist_paddle/INPUT_INTERFACE_visual_1'>
+        <pose frame=''>0 0 0.0875 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.025</length>
+            <radius>0.0508</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <uri>__default__</uri>
+            <name>__default__</name>
+          </script>
+        </material>
+      </visual>
+      <visual name='wrist_paddle/INPUT_INTERFACE_fixed_joint_lump__end_effector/INPUT_INTERFACE_visual_2'>
+        <pose frame=''>0 0 0.1 0 -0 0</pose>
         <geometry>
           <box>
             <size>0.01 0.01 0.01</size>
@@ -64,9 +710,23 @@
       <velocity_decay/>
       <self_collide>1</self_collide>
     </link>
-    <joint name='world_joint' type='fixed'>
-      <child>base</child>
-      <parent>world</parent>
+    <joint name='HEBI/wrist/X5_9' type='revolute'>
+      <child>wrist_paddle/INPUT_INTERFACE</child>
+      <parent>elbow_wrist1/INPUT_INTERFACE</parent>
+      <axis>
+        <xyz>0 -0 -1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.1</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
     </joint>
     <static>0</static>
     <plugin name='hebiros_gazebo_plugin' filename='libhebiros_gazebo_plugin.so'/>

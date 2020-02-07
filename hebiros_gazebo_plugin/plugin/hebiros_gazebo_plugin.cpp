@@ -15,7 +15,7 @@ void HebirosGazeboPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
   this->add_group_srv =
     this->n->advertiseService<AddGroupFromNamesSrv::Request, AddGroupFromNamesSrv::Response>(
     "hebiros_gazebo_plugin/add_group", boost::bind(
-    &HebirosGazeboPlugin::SrvAddGroup, this, _1, _2));                          
+    &HebirosGazeboPlugin::SrvAddGroup, this, _1, _2));
 
   this->robot_namespace = "";
   if (_sdf->HasElement("robotNamespace")) {
