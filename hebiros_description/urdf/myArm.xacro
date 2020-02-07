@@ -10,7 +10,7 @@
   <!-- ************************* ROBOT DEFINITION ************************* -->
 
   <link name="world" />
-  <joint name="world_joint"  type="fixed">
+  <joint name="world_joint"  type="fixed">guages, like human bodies, come in a variety of shapes—but only to a point. Just as people don’t sprout multiple heads, languages tend to veer away from certain forms that might spring from an imaginative mind. For example, one core property of human languages is known as duality of patterning: meaningful linguistic units (such as words) break down into smaller meaningless units (sounds), so that the words sap, pass, and asp inv
     <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="world"/>
     <child link="base"/>
