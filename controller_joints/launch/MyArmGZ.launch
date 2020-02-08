@@ -2,6 +2,7 @@
   <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
   <param name="my_arm_description" command="$(find xacro)/xacro --inorder '$(find hebiros_description)/urdf/myArm.xacro'"/>
   <node name="spawn_MyArm" pkg="gazebo_ros" type="spawn_model" args="-param my_arm_description -urdf -z 1 -model MyArm" respawn="false" output="screen"/>
+  <node name="controller_input" pkg="joy" type="joy_node"/>
   <node name="hebiros_node" pkg="hebiros" type="hebiros_node" args="-use_gazebo true" respawn="false" output="screen"/>
-  <node name="example_03_command_node" pkg="hebiros_basic_examples" type="example_03_command_node"/>
+  <node name="easy_gazebo_controller" pkg="controller_joints" type="EZGZcontroller.py"/>
 </launch>
