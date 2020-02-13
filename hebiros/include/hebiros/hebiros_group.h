@@ -12,7 +12,6 @@ class HebirosGroup {
 
     HebirosGroup();
     virtual ~HebirosGroup() = default;
-
     int size;
     std::map<std::string, std::string> joint_full_names;
     std::map<std::string, int> joints;

@@ -155,8 +155,9 @@ if __name__ == '__main__':
     global group_name
     group_name = "MyArm"
     rospy.wait_for_service("/hebiros/add_group_from_names")
-
+    rospy.wait_for_service("/hebiros_gazebo_plugin_node/hebiros_gazebo_plugin/add_group")
     add_group = rospy.ServiceProxy("/hebiros/add_group_from_names", AddGroupFromNamesSrv)
+    addGZgroup = rospy.ServiceProxy("/hebiros_gazebo_plugin_node/hebiros_gazebo_plugin/add_group", AddGroupFromNamesSrv)
 
     feedback_subscriber = rospy.Subscriber("/hebiros/" + group_name + "/feedback/joint_state", JointState,
                                            callback=callbackFeedback)
@@ -167,7 +168,9 @@ if __name__ == '__main__':
     resp1 = None
     while not resp1:
         resp1 = add_group(group_name, names, families)
-
+    resp1 = None
+    while not resp1:
+        resp1 = addGZgroup(group_name, names, families)
 
     rospy.Subscriber('/joy', Joy, callback=callbackJoy, callback_args=state)
 

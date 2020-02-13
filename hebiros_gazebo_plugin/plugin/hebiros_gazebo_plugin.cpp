@@ -10,7 +10,11 @@ void HebirosGazeboPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
 
 
   // Initialize the node handle
-  this->n.reset(new ros::NodeHandle("hebiros_gazebo_plugin_node"));
+  if (this->robot_namespace == "") {
+    this->n.reset(new ros::NodeHandle);
+  } else {
+    this->n.reset(new ros::NodeHandle(this->robot_namespace));
+  }
 
   this->add_group_srv =
     this->n->advertiseService<AddGroupFromNamesSrv::Request, AddGroupFromNamesSrv::Response>(
@@ -21,11 +25,7 @@ void HebirosGazeboPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
   if (_sdf->HasElement("robotNamespace")) {
     this->robot_namespace = _sdf->GetElement("robotNamespace")->Get<std::string>();
   }
-  if (this->robot_namespace == "") {
-    this->n.reset(new ros::NodeHandle);
-  } else {
-    this->n.reset(new ros::NodeHandle(this->robot_namespace));
-  }
+
 
   this->update_connection = event::Events::ConnectWorldUpdateBegin (
     boost::bind(&HebirosGazeboPlugin::OnUpdate, this, _1));
@@ -36,7 +36,6 @@ void HebirosGazeboPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
 //Update the joints at every simulation iteration
 void HebirosGazeboPlugin::OnUpdate(const common::UpdateInfo & _info) {
   ros::Time current_time = ros::Time::now();
-
   for (auto group_pair : hebiros_groups) {
     auto hebiros_group = group_pair.second;
 
@@ -126,10 +125,12 @@ void HebirosGazeboPlugin::UpdateGroup(std::shared_ptr<HebirosGazeboGroup> hebiro
 bool HebirosGazeboPlugin::SrvAddGroup(AddGroupFromNamesSrv::Request &req,
   AddGroupFromNamesSrv::Response &res) {
 
+  ROS_WARN("Gazebo will add group %s", req.group_name.c_str());
   if (hebiros_groups.find(req.group_name) != hebiros_groups.end()) {
     ROS_WARN("Group %s already exists", req.group_name.c_str());
     return true;
   }
+
 
   std::shared_ptr<HebirosGazeboGroup> hebiros_group =
     std::make_shared<HebirosGazeboGroup>(req.group_name, this->n);

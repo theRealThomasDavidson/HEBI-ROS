@@ -23,7 +23,7 @@ bool HebirosServices::entryList(
 bool HebirosServices::addGroup(
   AddGroupFromNamesSrv::Request &req, AddGroupFromNamesSrv::Response &res,
   const std::map<std::string, std::string>& joint_full_names, std::unique_ptr<HebirosGroup> group_tmp) {
-
+  ros::NodeHandle n;
   if (req.families.size() != 1 && req.families.size() != req.names.size()) {
     ROS_WARN("Invalid number of familes for group [%s]", req.group_name.c_str());
     return false;
@@ -41,6 +41,8 @@ bool HebirosServices::addGroup(
   HebirosGroup* group = registry.getGroup(req.group_name);
 
   ROS_INFO("Created group [%s]:", req.group_name.c_str());
+
+  ROS_INFO("group library active this does %i have group %s",registry.hasGroup(req.group_name.c_str()), req.group_name.c_str());
   for (int i = 0; i < req.families.size(); i++) {
     for (int j = 0; j < req.names.size(); j++) {
 

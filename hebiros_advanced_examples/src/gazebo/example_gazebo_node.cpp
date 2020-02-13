@@ -47,6 +47,8 @@ int main(int argc, char **argv) {
   //Call the add_group_from_urdf service to create a group until it succeeds
   //Specific topics and services will now be available under this group's namespace
   while(!add_group_client.call(add_group_srv)) {}
+  //add_gz_group.call(add_group_srv)
+
 
   //Construct a JointState to command to the modules
   //This may potentially contain a name, position, velocity, and effort for each module
