@@ -27,6 +27,8 @@ int main(int argc, char **argv) {
   //Create a client which uses the service to create a group
   ros::ServiceClient add_group_client = n.serviceClient<AddGroupFromNamesSrv>(
     "/hebiros/add_group_from_names");
+  ros::ServiceClient add_gz_group = n.serviceClient<AddGroupFromNamesSrv>(
+    "/hebiros_gazebo_plugin_node/hebiros_gazebo_plugin/add_group");
 
   //Create a subscriber to receive feedback from a group
   //Register feedback_callback as a callback which runs when feedback is received
@@ -50,6 +52,7 @@ int main(int argc, char **argv) {
   //Construct a JointState to command the modules
   //This may potentially contain a name, position, velocity, and effort for each module
   sensor_msgs::JointState command_msg;
+
   command_msg.name.push_back("HEBI/base");
   command_msg.name.push_back("HEBI/shoulder");
   command_msg.name.push_back("HEBI/elbow");
@@ -58,12 +61,12 @@ int main(int argc, char **argv) {
 
   feedback.position.reserve(3);
 
-  double spring_constant = -10;
+  double spring_constant = -15;
 
   while(ros::ok()) {
 
     //Apply Hooke's Law: F = -k * x to all modules and publish as a command
-    command_msg.effort[0] = spring_constant * feedback.position[0];
+    command_msg.effort[0] = 0;//spring_constant * feedback.position[0];
     command_msg.effort[1] = spring_constant * feedback.position[1];
     command_msg.effort[2] = spring_constant * feedback.position[2];
     command_publisher.publish(command_msg);
