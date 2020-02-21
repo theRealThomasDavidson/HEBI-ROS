@@ -1,0 +1,7 @@
+<launch>
+  <node name="hebiros_node" pkg="hebiros" type="hebiros_node" args="-use_gazebo true" respawn="false" output="screen"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+  <param name="my_arm_description" command="$(find xacro)/xacro '$(find hebiros_description)/urdf/myArm.xacro'"/>
+  <node name="spawn_MyArm" pkg="gazebo_ros" type="spawn_model" args="-param my_arm_description -urdf -z 1 -model my_group" respawn="false" output="screen"/>
+
+</launch>
